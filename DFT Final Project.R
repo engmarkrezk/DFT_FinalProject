@@ -3,6 +3,9 @@ library(tidyr)
 library(dplyr)
 library(stringr)
 library(reshape2)
+library(rlang)
+library(ggplot2)
+
 
 # 2- Import the data:-
 # 1st Dataset:
@@ -52,3 +55,19 @@ View(covid19_homeless_impact_3)
 
 # 3f: export this clean Dataset "covid19_homeless_impact_3" to CSV format. 
 write.csv(covid19_homeless_impact_3, "C:/Users/engma/Desktop/BST/DSO110-Final Group Project/DFT_Group/covid19_homeless_impact_3.csv", row.names = FALSE)
+
+
+# 4- Check Assumptions:-
+summary(covid19_homeless_impact_3$cumulative_population_cases)
+summary(covid19_homeless_impact_3$cumulative_homeless_cases)
+
+# 4a: Normally Distributed.
+ggplot(covid19_homeless_impact_3, aes(sample = rooms)) + geom_qq()                                  # rooms_plot
+ggplot(covid19_homeless_impact_3, aes(sample = rooms_occupied)) + geom_qq()                         # rooms_occupied_plot
+ggplot(covid19_homeless_impact_3, aes(sample = cumulative_population_cases)) + geom_qq()            # cumulative_population_cases_plot
+ggplot(covid19_homeless_impact_3, aes(sample = cumulative_homeless_cases)) + geom_qq()              # cumulative_homeless_cases_plot
+ggplot(covid19_homeless_impact_3, aes(sample = total_population_by_percentage)) + geom_qq()         # total_population_by_percent_plot
+ggplot(covid19_homeless_impact_3, aes(sample = total_homless_population_by_percentage)) + geom_qq() # total_homeless_pop_by_percent_plot
+
+
+
