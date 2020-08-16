@@ -23,38 +23,37 @@ View(covid19_cases_by_homelessness_status)
 
 # 3- Data Wrangling:-
 # 3a: Subset only variables of interest in the 1st Dataset.
-total_no_of_cases_1 <- total_no_of_cases[, 11:119]
-View(total_no_of_cases_1)
+total_no_of_cases_WR1 <- total_no_of_cases[, 11:119]
+View(total_no_of_cases_WR1)
+
+# filter only for San Francisco county.
+total_no_of_cases_WR1 <- filter(total_no_of_cases_WR1, county == "San Francisco")
+View(total_no_of_cases_WR1)
 
 # 3b: Transpose all dates to match counties.
-total_no_of_cases_2 <- total_no_of_cases_1 %>%
+total_no_of_cases_WR2 <- total_no_of_cases_WR1 %>%
   gather(date, cumulative_population_cases, X4.15.2020:X7.31.2020)
-View(total_no_of_cases_2)
+View(total_no_of_cases_WR2)
 
 # 3c: Remove the extra "X" letter from the date column to better join with the other datasets. 
-typeof(total_no_of_cases_2$date)  # check what data type is the date column.
-nchar(total_no_of_cases_2$date)   # check how many characters in this string date column. 
+typeof(total_no_of_cases_WR2$date)  # check what data type is the date column.
+nchar(total_no_of_cases_WR2$date)   # check how many characters in this string date column. 
 
-total_no_of_cases_2$date <- substr(total_no_of_cases_2$date, 2, 10)        # Extract all remaining 9 characters but not the X
-View(total_no_of_cases_2)
+total_no_of_cases_WR2$date <- substr(total_no_of_cases_WR2$date, 2, 10)        # Extract all remaining 9 characters but not the X
+View(total_no_of_cases_WR2)
 
 
 # 3d: Combining datasets together.
 # First, we'll merge  as an Outer Join "total_no_of_cases_2" with "covid19_homeless_impact" by 'date' & 'county'
-covid19_homeless_impact_1 <- merge(total_no_of_cases_2, covid19_homeless_impact, by=c("date","county"))
-View(covid19_homeless_impact_1)
+covid19_homeless_impact_WR1 <- merge(total_no_of_cases_WR2, covid19_homeless_impact, by=c("date","county"))
+View(covid19_homeless_impact_WR1)
 
-# Second, We'll group all the dates together in one row to add all values each day in one cell + take only variables of interests. 
-covid19_homeless_impact_2 <- aggregate(list(rooms=covid19_homeless_impact_1$rooms, rooms_occupied=covid19_homeless_impact_1$rooms_occupied,
- cumulative_population_cases=covid19_homeless_impact_1$cumulative_population_cases), by = list(date=covid19_homeless_impact_1$date), sum)
-View(covid19_homeless_impact_2)
-
-# Third, we'll merge this clean Dataset "covid19_homeless_impact_2" with our final 3rd Dataset "covid19_cases_by_homelessness_status" to add more variables of interests. 
-covid19_homeless_impact_3 <- merge(covid19_homeless_impact_2, covid19_cases_by_homelessness_status, by.x=c("date"), by.y=c("specimen_collection_date"))
-View(covid19_homeless_impact_3)
+# Second, we'll merge this clean Dataset "covid19_homeless_impact_WR1" with our final 3rd Dataset "covid19_cases_by_homelessness_status" to add more variables of interests. 
+covid19_homeless_impact_WR2 <- merge(covid19_homeless_impact_WR1, covid19_cases_by_homelessness_status, by.x=c("date"), by.y=c("specimen_collection_date"))
+View(covid19_homeless_impact_WR2)
 
 # 3f: export this clean Dataset "covid19_homeless_impact_3" to CSV format. 
-write.csv(covid19_homeless_impact_3, "C:/Users/engma/Desktop/BST/DSO110-Final Group Project/DFT_Group/covid19_homeless_impact_3.csv", row.names = FALSE)
+write.csv(covid19_homeless_impact_WR2, "C:/Users/engma/Desktop/BST/DSO110-Final Group Project/DFT_Group/covid19_homeless_impact_WR2.csv", row.names = FALSE)
 
 
 # 4- Check Assumptions:-
