@@ -1,4 +1,4 @@
-,date,county,rooms,rooms_occupied,trailers_requested,trailers_delivered,donated_trailers_delivered,cumulative_total_population_cases,cumulative_homeless_cases,cumulative_general_public_cases,total_population_by_percentage ,homless_population_by_percentage ,general_public_population_by_percentage
+,date,county,rooms,rooms_occupied,trailers_requested,trailers_delivered,donated_trailers_delivered,cumulative_total_population_cases,cumulative_homeless_cases,cumulative_general_public_cases,total_population_by_percentage ,homless_population_by_percentage,general_public_population_by_percentage
 0,4/15/2020,San Francisco,1012,751,0,0,0,987,119,868,0.111739433,1.216271464,0.09936796
 1,4/16/2020,San Francisco,1271,748,0,0,0,1013,120,893,0.114682924,1.226492232,0.102229941
 2,4/17/2020,San Francisco,1271,748,0,0,0,1019,123,896,0.115362191,1.257154538,0.102573378
