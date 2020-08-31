@@ -1,4 +1,4 @@
-﻿Date,San_Francisco1,Fresno2,Kern3,Ventura4,San_Francisco_population,Fresno_population,Kern_population,Ventura_population,,San_Francisco_persentage_with_COVID19,Fresno_percetage_with_Covid19,Kern_percentage_with_COVID19,Ventura_percentage_with_COVID19,counties,total_cases ,,%San_Francisco_to4,%Fresno_to4,%Kern_to4,%Ventura_to4
+﻿Date,San_Francisco1,Fresno2,Kern3,Ventura4,San_Francisco_population,Fresno_population,Kern_population,Ventura_population,,San_Francisco_percentage_with_COVID19,Fresno_percetage_with_Covid19,Kern_percentage_with_COVID19,Ventura_percentage_with_COVID19,counties,total_cases ,,%San_Francisco_to4,%Fresno_to4,%Kern_to4,%Ventura_to4
 4/15/2020,987,222,462,350,"881,549",999101,"900,202",846006,,0.111962012,0.022219976,0.051321814,0.041370865,San_Francisco,2021,,48.8372093,10.98466106,22.85997031,17.31815933
 4/16/2020,1013,251,533,365,,,,,,0.114911366,0.025122585,0.059208933,0.043143902,Fresno,2162,,46.85476411,11.60962072,24.65309898,16.88251619
 4/17/2020,1019,265,565,384,,,,,,0.115591986,0.026523845,0.062763691,0.045389749,Kern,2233,,45.63367667,11.8674429,25.30228392,17.19659651
