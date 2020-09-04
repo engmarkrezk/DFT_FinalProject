@@ -53,7 +53,8 @@ View(covid19_homeless_impact_Final)
 # 2- the expected frequencies must be greater than 5 for each cell.
 
 # 3d: Creating the CrossTable:
-CrossTable(covid19_homeless_impact_Final$cumulative_homeless_cases_R, covid19_homeless_impact_Final$rooms_available_R, fisher=TRUE, chisq = TRUE, expected = TRUE, sresid=TRUE, format="SPSS")
+CrossTable(covid19_homeless_impact_Final$cumulative_homeless_cases_R, covid19_homeless_impact_Final$rooms_available_R, 
+           fisher=TRUE, chisq = TRUE, expected = TRUE, sresid=TRUE, format="SPSS")
 
 # Check Assumption of Expected Frequencies: we have met this assumption. 
 
@@ -79,12 +80,14 @@ chisq.test(x = observed, p = expected)
 
 #  the p value is less than .05, then our observed and expected values differ. 
 # In this case, this means that the homeless impact is not 80% compared to the general public.  
-# in order to know exactly the difference of impact in percentage between the 2 population. we'll run the z-test analysis between the 2 proportions in the whole population.
+# in order to know exactly the difference of impact in percentage between the 2 population. 
+# we'll run the z-test analysis between the 2 proportions in the whole population.
 
 
 # 3e: Run two proportion z-test Analysis:
 # There are 9,784 homeless_population and 873,521 general_public_population in San Francisco, 
-# Off of the homeless_population, there are 246 covid19 positive cases and of the general_public_population, there are 6177 covid19 positive cases.
+# Off of the homeless_population, there are 246 covid19 positive cases and 
+# off of the general_public_population, there are 6177 covid19 positive cases.
 prop.test(x = c(246, 6177), n = c(9784, 873521),
           alternative = "two.sided")
 # since the p value is < 0.05 that means the proportions of the impact of covid in the 2 populations are not equal. 
@@ -94,8 +97,7 @@ prop.test(x = c(246, 6177), n = c(9784, 873521),
 # Using this tool @ https://www.calculatorsoup.com/calculators/algebra/percent-difference-calculator.php
 # we conclude that the Homeless population was hit %111.8 harder than the general public population. 
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+#---------------------------------------------------------------------------------------------------------------------------------------------
 # Rachael's questions: 
 
 # Q3:
@@ -172,11 +174,9 @@ summary(lmMod_bc2)
 # 3a: Question Set Up: 
 #                     Compare the 4 counties cases and extrapolate which one did handle the cases better over time?
 
-Finally <- read.csv("C:/Users/engma/Desktop/BST/DSO110-Final Group Project/DFT_Group/Finally.csv")
-View(Finally)
+counties <- read.csv("C:/Users/engma/Desktop/BST/DSO110-Final Group Project/DFT_Group/counties.csv")
+View(counties)
 
-
-counties <-Finally
 
 
 keeps <- c("ï..county","X.April", "X.May", "X.June", "X.July")
@@ -203,8 +203,6 @@ plotNormalHistogram(log(counties3$X.July))
 
 # 2- Homogeneity of Variance:
 
-leveneTest(repdat ~ Treatment.Group*contrasts, data=counties21)
-
 data1 <- counties3
 df <- data1[,2:length(colnames(data1))]
 df.april <- data.frame(df[,1])
@@ -229,20 +227,5 @@ RManova <- aov(repdat~contrasts+Error(df...1.), df.transform)
 summary(RManova)
 
 
-anova_test(counties2)
-
-ggplot(data = df.transform , aes(x = df...1., y = repdat)) +
-  geom_point() +
-  labs(x = "Date",
-       y = "Total Cases",
-       title = "Total Cases in Four Counties",
-       subtitle = "San Francisco COVID19 Cases")
-
-
-
-ggplot(data = counties1, aes(x = Date, y = total_cases)) +
-  geom_point() +
-  labs(x = "Date",
-       y = "Total Cases",
-       title = "Total Cases in Four Counties",
-       subtitle = "San Francisco COVID19 Cases")
+# 3- Interpret Result: 
+# There was a significant change between covid cases in April, May, June and July among the 4 counties. 
