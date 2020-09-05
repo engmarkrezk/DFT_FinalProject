@@ -32,7 +32,7 @@ plot(lmMod)
 
 #Further test for heteroscedasticity with Breush-Pagan test
 lmtest::bptest(lmMod)
-## pvalue= .01 < .05 hence proving heteroscedasticity.
+## pvalue= .02 < .05 hence proving heteroscedasticity.
 
 # correcting heteroscedasticity
 distBCMod1 <- caret::BoxCoxTrans(SFR$general_public_population_by_percentage)
@@ -65,11 +65,9 @@ summary(lmMod_bc2)
 ## reject null Hypothesis is rejected .Fstatistic is big.adjusted R^2 is .9989 so 99%chance that AM height affects PM height.
 
 
-
-
-
-
-
+# testing if our data is exponential
+exMod <- lm(log(SFR$general_public_population_by_percentage)~SFR$homless_population_by_percentage)
+summary(exMod)
 
 
 
